@@ -1,6 +1,6 @@
 package br.edu.insper.desagil.pi.freela;
 
-public class Momento {
+public abstract class Momento {
     public int ajusta(int valor, int minimo, int maximo){
         if(valor<minimo){
             return minimo;
@@ -11,5 +11,5 @@ public class Momento {
         }
     }
 
-    public int minutos(){}
+    public abstract int minutos();
 }

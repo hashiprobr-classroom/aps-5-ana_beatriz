@@ -41,7 +41,20 @@ public class Data extends Momento{
     }
 
     public void atualiza(int novoAno, int novoMes, int novoDia){
-
+        ano = ajusta(novoAno,2070,1970);
+        mes = ajusta(novoMes,12,1);
+        dia = ajusta(novoDia,limite.get(mes),1);
     }
 
+    @Override
+    public int minutos(){
+        int anos = ano - 1970;
+        int dias = anos * 365;
+
+        for (int m = 1; m < mes; m++){
+            dias += limite.get(m);
+        }
+        dias += dia - 1;
+        return dias * 24 * 60;
+    }
 }
