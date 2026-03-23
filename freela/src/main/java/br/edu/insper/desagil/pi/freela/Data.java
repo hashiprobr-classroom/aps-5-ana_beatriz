@@ -9,7 +9,7 @@ public class Data extends Momento{
     private int dia;
     private Map<Integer, Integer> limite = new HashMap<>();
 
-    public Data (Map<Integer, Integer> limite){
+    public Data (){
         ano = 1970;
         mes = 1;
         dia = 1;
@@ -41,9 +41,9 @@ public class Data extends Momento{
     }
 
     public void atualiza(int novoAno, int novoMes, int novoDia){
-        ano = ajusta(novoAno,2070,1970);
-        mes = ajusta(novoMes,12,1);
-        dia = ajusta(novoDia,limite.get(mes),1);
+        ano = ajusta(novoAno,1970,2070);
+        mes = ajusta(novoMes,1,12);
+        dia = ajusta(novoDia,1,limite.get(mes));
     }
 
     @Override

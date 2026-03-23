@@ -17,8 +17,8 @@ public class DataHorario extends Momento {
     public void setHora(int hora){this.hora = hora;}
 
     public void atualiza (int novaHora, int novoMinuto){
-        hora = ajusta(novaHora,23,0);
-        minuto = ajusta(novoMinuto,59,0);
+        hora = ajusta(novaHora,0,23);
+        minuto = ajusta(novoMinuto,0,59);
     }
 
     @Override
