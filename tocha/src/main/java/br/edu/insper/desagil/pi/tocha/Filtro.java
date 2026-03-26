@@ -7,6 +7,22 @@ public class Filtro {
         this.tipo = tipo;
     }
 
+    public Imagem calculaSaida(int[][] entrada, int altura, int largura, double[][] kernel, int[][] saida){
+        for (int y = 1; y < altura - 1; y++) {
+            for (int x = 1; x < largura - 1; x++) {
+                double s = 0;
+                for (int dy = -1; dy < 2; dy++) {
+                    for (int dx = -1; dx < 2; dx++) {
+                        s += entrada[y + dy][x + dx] * kernel[dy + 1][dx + 1];
+                    }
+                }
+                saida[y - 1][x - 1] = (int) s;
+            }
+        }
+
+        return new Imagem(saida);
+    }
+
     public Imagem processa(Imagem imagem) {
         if (tipo.equals("media")) {
             // inicializa saída
@@ -83,21 +99,7 @@ public class Filtro {
             kernel[2][1] = 0;
             kernel[2][2] = 1;
 
-            // calcula saída
-
-            for (int y = 1; y < altura - 1; y++) {
-                for (int x = 1; x < largura - 1; x++) {
-                    double s = 0;
-                    for (int dy = -1; dy < 2; dy++) {
-                        for (int dx = -1; dx < 2; dx++) {
-                            s += entrada[y + dy][x + dx] * kernel[dy + 1][dx + 1];
-                        }
-                    }
-                    saida[y - 1][x - 1] = (int) s;
-                }
-            }
-
-            return new Imagem(saida);
+            return calculaSaida(entrada,altura,largura,kernel,saida);
         } else if (tipo.equals("sobel_y")) {
             // inicializa saída
 
@@ -128,21 +130,7 @@ public class Filtro {
             kernel[2][1] = 2;
             kernel[2][2] = 1;
 
-            // calcula saída
-
-            for (int y = 1; y < altura - 1; y++) {
-                for (int x = 1; x < largura - 1; x++) {
-                    double s = 0;
-                    for (int dy = -1; dy < 2; dy++) {
-                        for (int dx = -1; dx < 2; dx++) {
-                            s += entrada[y + dy][x + dx] * kernel[dy + 1][dx + 1];
-                        }
-                    }
-                    saida[y - 1][x - 1] = (int) s;
-                }
-            }
-
-            return new Imagem(saida);
+            return calculaSaida(entrada,altura,largura,kernel,saida);
         } else if (tipo.equals("laplace")) {
             // inicializa saída
 
@@ -173,21 +161,7 @@ public class Filtro {
             kernel[2][1] = -1;
             kernel[2][2] = 0;
 
-            // calcula saída
-
-            for (int y = 1; y < altura - 1; y++) {
-                for (int x = 1; x < largura - 1; x++) {
-                    double s = 0;
-                    for (int dy = -1; dy < 2; dy++) {
-                        for (int dx = -1; dx < 2; dx++) {
-                            s += entrada[y + dy][x + dx] * kernel[dy + 1][dx + 1];
-                        }
-                    }
-                    saida[y - 1][x - 1] = (int) s;
-                }
-            }
-
-            return new Imagem(saida);
+            return calculaSaida(entrada,altura,largura,kernel,saida);
         } else {
             throw new IllegalStateException("tipo inválido");
         }
